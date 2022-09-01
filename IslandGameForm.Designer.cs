@@ -1,6 +1,6 @@
 ﻿namespace program4
 {
-    partial class Form1
+    partial class IslandGameForm
     {
         /// <summary>
         ///  Required designer variable.

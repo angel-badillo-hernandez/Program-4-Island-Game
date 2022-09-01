@@ -1,8 +1,8 @@
 namespace program4
 {
-    public partial class Form1 : Form
+    public partial class IslandGameForm : Form
     {
-        public Form1()
+        public IslandGameForm()
         {
             InitializeComponent();
         }
