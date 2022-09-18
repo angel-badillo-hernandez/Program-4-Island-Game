@@ -4,6 +4,8 @@ namespace program4
     {
         public IslandGameForm()
         {
+            NavigationSystem navigationSystem;
+
             InitializeComponent();
         }
     }
