@@ -4,9 +4,9 @@
     {
         private Point treasureLoc;
         private char[,] GameMap;
-        private int Rows { get; }
-        private int Columns { get; }
-        private int GuessCount { get; }
+        public int Rows { get; }
+        public int Columns { get; }
+        public int GuessCount { get; }
         private bool won;                      // Might not need
         private readonly IslandGameForm? form; // Might not need
      
