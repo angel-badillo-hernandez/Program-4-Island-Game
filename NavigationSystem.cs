@@ -1,4 +1,5 @@
-﻿namespace program4
+﻿// Put comment here
+namespace program4
 {
     internal class NavigationSystem
     {
@@ -39,13 +40,22 @@
         }
 
 
-        // String representation of GameMap array
+        /// <summary>
+        /// Creates a string representation of NavigationSystem class and
+        /// returns it.
+        /// </summary>
+        /// <returns>  A string representation of Navigation System class.
+        /// </returns>
         public override string ToString()
         {
             string text = "  ";
+
+            // Add column indices at the top
             for (int j = 0; j < Columns; j++)
                 text += j + " ";
             text += Environment.NewLine;
+
+            // For every row, add row index and each entry in the row
             for (int i = 0; i < Rows; i++)
             {
                 text += i + " ";
@@ -59,7 +69,14 @@
             return text;
         }
 
-        // TODO: Redo guess method, again :')
+        /// <summary>
+        /// Takes in indices representing a guess, determines if guess was
+        /// correct and returns true. Otherwise, places the appropriate hint
+        /// on the map.
+        /// </summary>
+        /// <param name="i"> Row index of the guess. </param>
+        /// <param name="j"> Column index of the guess. </param>
+        /// <returns>true if correct guess, false otherwise. </returns>
         public bool EvaluateGuess(int i, int j)
         {
             guessCount++;
@@ -67,7 +84,7 @@
             // If a guess was not made at (i,j), update symbol
             if (GameMap[i, j] == '~')
             {
-                // Check if guess was correct
+                // Check if guess was correct, return true
                 if ((i == islandIndexI) && (j == islandIndexJ))
                 {
                     GameMap[i, j] = 'I';
@@ -92,6 +109,7 @@
                 else
                     GameMap[i, j] = 'S';
             }
+            // return false if the guess was not correct
             return false;
         }
     }
