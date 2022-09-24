@@ -8,6 +8,7 @@
         private int guessCount;
         public int Rows { get { return GameMap.GetLength(0); } }
         public int Columns { get { return GameMap.GetLength(1); } }
+        
         public int GuessCount { get { return guessCount; } }
 
         public NavigationSystem(int numRows, int numColumns)
@@ -33,13 +34,17 @@
         // String representation of GameMap array
         public override string ToString()
         {
-            string text = "";
+            string text = "  ";
+            for (int j = 0; j < Columns; j++)
+                text += j + " ";
+            text += Environment.NewLine;
             for (int i = 0; i < Rows; i++)
             {
+                text += i + " ";
                 for (int j = 0; j < Columns; j++)
                 {
                     text += char.ToString(GameMap[i, j]);
-                    text += "  ";
+                    text += " ";
                 }
                 text += Environment.NewLine;
             }
@@ -49,27 +54,35 @@
         // TODO: Redo guess method, again :')
         public bool EvaluateGuess(int i, int j)
         {
+            guessCount++;
+
+            // If a guess was not made at (i,j), update symbol
             if (GameMap[i, j] == '~')
             {
+                // Check if guess was correct
                 if ((i == islandIndexI) && (j == islandIndexJ))
                 {
                     GameMap[i, j] = 'I';
                     return true;
                 }
+                // Check if guess is on the same row as island
                 else if (islandIndexI == i)
                     GameMap[i, j] = 'R';
+                // Check if guess is on the same column a island
                 else if (islandIndexJ == j)
                     GameMap[i, j] = 'C';
-                else if (islandIndexJ < j && (Math.Abs(i - islandIndexI) == 1))
+                // If not the second guess, check if island is west
+                else if (islandIndexJ < j && (guessCount % 2 != 0))
                     GameMap[i, j] = 'W';
-                else if (islandIndexJ > j && (Math.Abs(i - islandIndexI) == 1))
+                // If not second guess, check if island is east
+                else if (islandIndexJ > j && (guessCount % 2 != 0))
                     GameMap[i, j] = 'E';
-                else if (islandIndexI < i)
+                // If second guess, check if island is north
+                else if (islandIndexI < i && guessCount % 2 == 0)
                     GameMap[i, j] = 'N';
-                else if (islandIndexI > i)
+                // Island is south otherwise
+                else
                     GameMap[i, j] = 'S';
-                guessCount++;
-
             }
             return false;
         }
