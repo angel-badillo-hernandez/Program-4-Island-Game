@@ -2,24 +2,23 @@
 {
     internal class NavigationSystem
     {
-        private Point treasureLoc;
+        private readonly int islandIndexI;
+        private readonly int islandIndexJ;
         private char[,] GameMap;
-        public int Rows { get; }
-        public int Columns { get; }
-        public int GuessCount { get; }
-        private bool won;                      // Might not need
-        private readonly IslandGameForm? form; // Might not need
-     
-        public NavigationSystem(int x, int y)
-        {
-            Rows = x;
-            Columns = y;
-            GameMap = new char[x, y];
+        private int guessCount;
+        public int Rows { get { return GameMap.GetLength(0); } }
+        public int Columns { get { return GameMap.GetLength(1); } }
+        public int GuessCount { get { return guessCount; } }
 
+        public NavigationSystem(int numRows, int numColumns)
+        {
+            GameMap = new char[numRows, numColumns];
+            guessCount = 0;
             // Generate Random Location
             Random rand = new Random();
-            treasureLoc = new Point(rand.Next(0,Rows), rand.Next(0,Columns));
-            
+            islandIndexI = rand.Next(0, Rows);
+            islandIndexJ = rand.Next(0, Columns);
+
             // Generate initial Map
             for (int i = 0; i < Rows; i++)
             {
@@ -30,59 +29,49 @@
             }
         }
 
-        public string PrintArray()
+
+        // String representation of GameMap array
+        public override string ToString()
         {
             string text = "";
             for (int i = 0; i < Rows; i++)
             {
                 for (int j = 0; j < Columns; j++)
                 {
-                    text += Char.ToString(GameMap[i, j]);
+                    text += char.ToString(GameMap[i, j]);
                     text += "  ";
                 }
                 text += Environment.NewLine;
             }
-
             return text;
         }
 
-        // TODO: Make this work
-        /*public void Guess(int x, int y)
+        // TODO: Redo guess method, again :')
+        public bool EvaluateGuess(int i, int j)
         {
-            GuessCount++; // Increment GuessCount
-            string after = "";
-            won = false;
-            if ((x == treasureLoc.X) && (y == treasureLoc.Y))
+            if (GameMap[i, j] == '~')
             {
-                form.congratsText.Text = "Congratulations! You won!";
-                form.playAgain.Visible = true;
-                form.exitButton.Visible = true;
-                form.guessButton.Enabled = false;
-                won = true;
-            }
-            else if (GameMap[x, y] == '~')
-            {
-                if (treasureLoc.X > y)
-                    GameMap[x, y] = 'N';
-                else if (treasureLoc.X < y)
-                    GameMap[x, y] = 'S';
-                else if (treasureLoc.Y > x)
-                    GameMap[x, y] = 'W';
-                else if (treasureLoc.Y < x)
-                    GameMap[x, y] = 'E';
-                else if (treasureLoc.X == x)
-                    GameMap[x, y] = 'C';
-                else if (treasureLoc.Y == y)
-                    GameMap[x, y] = 'R';
+                if ((i == islandIndexI) && (j == islandIndexJ))
+                {
+                    GameMap[i, j] = 'I';
+                    return true;
+                }
+                else if (islandIndexI == i)
+                    GameMap[i, j] = 'R';
+                else if (islandIndexJ == j)
+                    GameMap[i, j] = 'C';
+                else if (islandIndexJ < j && (Math.Abs(i - islandIndexI) == 1))
+                    GameMap[i, j] = 'W';
+                else if (islandIndexJ > j && (Math.Abs(i - islandIndexI) == 1))
+                    GameMap[i, j] = 'E';
+                else if (islandIndexI < i)
+                    GameMap[i, j] = 'N';
+                else if (islandIndexI > i)
+                    GameMap[i, j] = 'S';
+                guessCount++;
 
-                after = PrintArray();
-                UpdateLabelSix(after);
             }
-            else
-                MessageBox.Show("You've already entered this spot! Try another.");
-            after = PrintArray();
-            UpdateLabelSix(after);
-
-        } */
+            return false;
+        }
     }
 }
