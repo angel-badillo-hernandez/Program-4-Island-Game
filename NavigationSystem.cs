@@ -8,8 +8,14 @@
         private int guessCount;
         public int Rows { get { return GameMap.GetLength(0); } }
         public int Columns { get { return GameMap.GetLength(1); } }
-        
         public int GuessCount { get { return guessCount; } }
+        public string Size
+        {
+            get
+            {
+                return Rows.ToString() + " x " + Columns.ToString();
+            }
+        }
 
         public NavigationSystem(int numRows, int numColumns)
         {
