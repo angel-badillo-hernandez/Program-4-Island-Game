@@ -1,4 +1,5 @@
 // Put comment here
+
 namespace program4
 {
     public partial class IslandGameForm : Form
@@ -8,6 +9,20 @@ namespace program4
         {
             navigationSystem = null;
             InitializeComponent();
+        }
+
+        private void ToggleMapCreation(bool toggle)
+        {
+            StartButton.Enabled = toggle;
+            EnterRowsTextBox.Enabled = toggle;
+            EnterColumnsTextBox.Enabled = toggle;
+        }
+
+        private void ToggleGuessing(bool toggle)
+        {
+            GuessButton.Enabled = toggle;
+            EnterITextBox.Enabled = toggle;
+            EnterJTextBox.Enabled = toggle;
         }
 
         private void InfoButton_Click(object sender, EventArgs e)
@@ -47,7 +62,8 @@ namespace program4
                 return;
             }
             // Check if size is valid
-            else if ((numRows <= 0 || numRows > NavigationSystem.MAXROWS) || ((numCols <= 0) || (numCols > NavigationSystem.MAXCOLUMNS)))
+            else if ((numRows <= 0 || numRows > NavigationSystem.MAXROWS) || 
+                ((numCols <= 0) || (numCols > NavigationSystem.MAXCOLUMNS)))
             {
                 MessageBox.Show(text,caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -59,10 +75,61 @@ namespace program4
                 MapLabel.Text = navigationSystem.ToString();
                 GuessCountLabel.Text = "Guesses: " + navigationSystem.GuessCount;
                 
-                // Disable START button and textboxes until game ends
-                StartButton.Enabled = false;
-                EnterRowsTextBox.Enabled = false;
-                EnterColumnsTextBox.Enabled = false;
+                // Disable START button and corresponding textboxes until
+                // the game ends
+                ToggleMapCreation(false);
+
+                // Enable GUESS button and corresponding textboxes until game ends
+                ToggleGuessing(true);
+            }
+        }
+
+        private void GuessButton_Click(object sender, EventArgs e)
+        {
+            string text = "Please enter a valid guess within the bounds of " +
+                "the map.";
+            string caption = "INVALID GUESS";
+            string tempI;
+            string tempJ;
+            int i;
+            int j;
+
+            tempI = EnterITextBox.Text;
+            tempJ = EnterJTextBox.Text;
+
+            // Check if strings are valid integers
+            if (!(int.TryParse(tempI, out i) && int.TryParse(tempJ, out j)))
+            {
+                MessageBox.Show(text, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            // Check if size is valid
+            else if ((i < 0 || i > navigationSystem!.MaxI) || ((j < 0) || 
+                (j > navigationSystem.MaxJ)))
+            {
+                MessageBox.Show(text, caption, MessageBoxButtons.OK, 
+                    MessageBoxIcon.Error);
+            }
+            else
+            {
+                bool isWin = navigationSystem.EvaluateGuess(i, j);
+                MapLabel.Text = navigationSystem.ToString();
+                GuessCountLabel.Text = $"Guesses: " +
+                    navigationSystem.GuessCount;
+
+                if(isWin)
+                {
+                    // Enable START button and corresponding textboxes
+                    ToggleMapCreation(true);
+
+                    // Disable GUESS button and corresponding textboxes
+                    ToggleGuessing(false);
+
+                    DialogResult dialogResult = MessageBox.Show("You Won!!!!", "You Won",MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dialogResult == DialogResult.Yes)
+                        return;
+                    else
+                        Close();
+                }
             }
         }
     }

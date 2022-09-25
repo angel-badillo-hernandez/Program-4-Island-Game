@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.TitleLabel = new System.Windows.Forms.Label();
             this.InfoButton = new System.Windows.Forms.Button();
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.EnterRowsLabel = new System.Windows.Forms.Label();
@@ -41,20 +41,27 @@
             this.MapCreateGroupBox = new System.Windows.Forms.GroupBox();
             this.MapGroupBox = new System.Windows.Forms.GroupBox();
             this.GuessCountLabel = new System.Windows.Forms.Label();
+            this.GuessGroupBox = new System.Windows.Forms.GroupBox();
+            this.EnterILabel = new System.Windows.Forms.Label();
+            this.EnterJLabel = new System.Windows.Forms.Label();
+            this.EnterITextBox = new System.Windows.Forms.TextBox();
+            this.EnterJTextBox = new System.Windows.Forms.TextBox();
+            this.GuessButton = new System.Windows.Forms.Button();
             this.MapCreateGroupBox.SuspendLayout();
             this.MapGroupBox.SuspendLayout();
+            this.GuessGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // TitleLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Courier New", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(201, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(348, 27);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Find the Tropical Island";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.TitleLabel.AutoSize = true;
+            this.TitleLabel.Font = new System.Drawing.Font("Courier New", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.TitleLabel.Location = new System.Drawing.Point(201, 9);
+            this.TitleLabel.Name = "TitleLabel";
+            this.TitleLabel.Size = new System.Drawing.Size(348, 27);
+            this.TitleLabel.TabIndex = 0;
+            this.TitleLabel.Text = "Find the Tropical Island";
+            this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // InfoButton
             // 
@@ -162,15 +169,75 @@
             this.GuessCountLabel.TabIndex = 8;
             this.GuessCountLabel.Text = "Guesses:";
             // 
+            // GuessGroupBox
+            // 
+            this.GuessGroupBox.Controls.Add(this.GuessButton);
+            this.GuessGroupBox.Controls.Add(this.EnterJTextBox);
+            this.GuessGroupBox.Controls.Add(this.EnterITextBox);
+            this.GuessGroupBox.Controls.Add(this.EnterJLabel);
+            this.GuessGroupBox.Controls.Add(this.EnterILabel);
+            this.GuessGroupBox.Location = new System.Drawing.Point(12, 230);
+            this.GuessGroupBox.Name = "GuessGroupBox";
+            this.GuessGroupBox.Size = new System.Drawing.Size(271, 144);
+            this.GuessGroupBox.TabIndex = 11;
+            this.GuessGroupBox.TabStop = false;
+            this.GuessGroupBox.Text = "Guess";
+            // 
+            // EnterILabel
+            // 
+            this.EnterILabel.AutoSize = true;
+            this.EnterILabel.Location = new System.Drawing.Point(9, 37);
+            this.EnterILabel.Name = "EnterILabel";
+            this.EnterILabel.Size = new System.Drawing.Size(105, 15);
+            this.EnterILabel.TabIndex = 0;
+            this.EnterILabel.Text = "Enter i index:";
+            // 
+            // EnterJLabel
+            // 
+            this.EnterJLabel.AutoSize = true;
+            this.EnterJLabel.Location = new System.Drawing.Point(9, 67);
+            this.EnterJLabel.Name = "EnterJLabel";
+            this.EnterJLabel.Size = new System.Drawing.Size(105, 15);
+            this.EnterJLabel.TabIndex = 1;
+            this.EnterJLabel.Text = "Enter j index:";
+            // 
+            // EnterITextBox
+            // 
+            this.EnterITextBox.Enabled = false;
+            this.EnterITextBox.Location = new System.Drawing.Point(160, 31);
+            this.EnterITextBox.Name = "EnterITextBox";
+            this.EnterITextBox.Size = new System.Drawing.Size(94, 21);
+            this.EnterITextBox.TabIndex = 9;
+            // 
+            // EnterJTextBox
+            // 
+            this.EnterJTextBox.Enabled = false;
+            this.EnterJTextBox.Location = new System.Drawing.Point(160, 61);
+            this.EnterJTextBox.Name = "EnterJTextBox";
+            this.EnterJTextBox.Size = new System.Drawing.Size(94, 21);
+            this.EnterJTextBox.TabIndex = 10;
+            // 
+            // GuessButton
+            // 
+            this.GuessButton.Enabled = false;
+            this.GuessButton.Location = new System.Drawing.Point(91, 103);
+            this.GuessButton.Name = "GuessButton";
+            this.GuessButton.Size = new System.Drawing.Size(75, 23);
+            this.GuessButton.TabIndex = 11;
+            this.GuessButton.Text = "GUESS";
+            this.GuessButton.UseVisualStyleBackColor = true;
+            this.GuessButton.Click += new System.EventHandler(this.GuessButton_Click);
+            // 
             // IslandGameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.GuessGroupBox);
             this.Controls.Add(this.MapGroupBox);
             this.Controls.Add(this.MapCreateGroupBox);
             this.Controls.Add(this.InfoButton);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.TitleLabel);
             this.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Name = "IslandGameForm";
             this.Text = "Find the Tropical Island";
@@ -178,6 +245,8 @@
             this.MapCreateGroupBox.PerformLayout();
             this.MapGroupBox.ResumeLayout(false);
             this.MapGroupBox.PerformLayout();
+            this.GuessGroupBox.ResumeLayout(false);
+            this.GuessGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -185,7 +254,7 @@
 
         #endregion
 
-        private Label label1;
+        private Label TitleLabel;
         private Button InfoButton;
         private HelpProvider helpProvider1;
         private Label EnterRowsLabel;
@@ -198,5 +267,11 @@
         private GroupBox MapCreateGroupBox;
         private GroupBox MapGroupBox;
         private Label GuessCountLabel;
+        private GroupBox GuessGroupBox;
+        private Label EnterJLabel;
+        private Label EnterILabel;
+        private Button GuessButton;
+        private TextBox EnterJTextBox;
+        private TextBox EnterITextBox;
     }
 }
