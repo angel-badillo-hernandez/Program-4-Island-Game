@@ -28,7 +28,7 @@ namespace program4
         private DialogResult ShowWinMessageBox()
         {
             return MessageBox.Show("You won with only " +
-                navigationSystem!.GuessCount + " guesses!\n\n" +
+                navigationSystem!.GuessCount + " guess(es)!\n\n" +
                 "Would you like to play again?", "Victory!!!",
                 MessageBoxButtons.YesNo);
         }
