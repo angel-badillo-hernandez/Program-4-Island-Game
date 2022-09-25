@@ -3,6 +3,8 @@ namespace program4
 {
     internal class NavigationSystem
     {
+        public const int MAXROWS = 10;
+        public const int MAXCOLUMNS = 10;
         private readonly int islandIndexI;
         private readonly int islandIndexJ;
         private char[,] GameMap;
