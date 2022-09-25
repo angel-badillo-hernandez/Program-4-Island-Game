@@ -42,11 +42,11 @@
             this.MapGroupBox = new System.Windows.Forms.GroupBox();
             this.GuessCountLabel = new System.Windows.Forms.Label();
             this.GuessGroupBox = new System.Windows.Forms.GroupBox();
-            this.EnterILabel = new System.Windows.Forms.Label();
-            this.EnterJLabel = new System.Windows.Forms.Label();
-            this.EnterITextBox = new System.Windows.Forms.TextBox();
-            this.EnterJTextBox = new System.Windows.Forms.TextBox();
             this.GuessButton = new System.Windows.Forms.Button();
+            this.EnterJTextBox = new System.Windows.Forms.TextBox();
+            this.EnterITextBox = new System.Windows.Forms.TextBox();
+            this.EnterJLabel = new System.Windows.Forms.Label();
+            this.EnterILabel = new System.Windows.Forms.Label();
             this.MapCreateGroupBox.SuspendLayout();
             this.MapGroupBox.SuspendLayout();
             this.GuessGroupBox.SuspendLayout();
@@ -120,9 +120,8 @@
             this.MapLabel.AutoSize = true;
             this.MapLabel.Location = new System.Drawing.Point(107, 65);
             this.MapLabel.Name = "MapLabel";
-            this.MapLabel.Size = new System.Drawing.Size(28, 15);
+            this.MapLabel.Size = new System.Drawing.Size(0, 15);
             this.MapLabel.TabIndex = 7;
-            this.MapLabel.Text = "Map";
             // 
             // StartButton
             // 
@@ -183,40 +182,6 @@
             this.GuessGroupBox.TabStop = false;
             this.GuessGroupBox.Text = "Guess";
             // 
-            // EnterILabel
-            // 
-            this.EnterILabel.AutoSize = true;
-            this.EnterILabel.Location = new System.Drawing.Point(9, 37);
-            this.EnterILabel.Name = "EnterILabel";
-            this.EnterILabel.Size = new System.Drawing.Size(105, 15);
-            this.EnterILabel.TabIndex = 0;
-            this.EnterILabel.Text = "Enter i index:";
-            // 
-            // EnterJLabel
-            // 
-            this.EnterJLabel.AutoSize = true;
-            this.EnterJLabel.Location = new System.Drawing.Point(9, 67);
-            this.EnterJLabel.Name = "EnterJLabel";
-            this.EnterJLabel.Size = new System.Drawing.Size(105, 15);
-            this.EnterJLabel.TabIndex = 1;
-            this.EnterJLabel.Text = "Enter j index:";
-            // 
-            // EnterITextBox
-            // 
-            this.EnterITextBox.Enabled = false;
-            this.EnterITextBox.Location = new System.Drawing.Point(160, 31);
-            this.EnterITextBox.Name = "EnterITextBox";
-            this.EnterITextBox.Size = new System.Drawing.Size(94, 21);
-            this.EnterITextBox.TabIndex = 9;
-            // 
-            // EnterJTextBox
-            // 
-            this.EnterJTextBox.Enabled = false;
-            this.EnterJTextBox.Location = new System.Drawing.Point(160, 61);
-            this.EnterJTextBox.Name = "EnterJTextBox";
-            this.EnterJTextBox.Size = new System.Drawing.Size(94, 21);
-            this.EnterJTextBox.TabIndex = 10;
-            // 
             // GuessButton
             // 
             this.GuessButton.Enabled = false;
@@ -227,6 +192,40 @@
             this.GuessButton.Text = "GUESS";
             this.GuessButton.UseVisualStyleBackColor = true;
             this.GuessButton.Click += new System.EventHandler(this.GuessButton_Click);
+            // 
+            // EnterJTextBox
+            // 
+            this.EnterJTextBox.Enabled = false;
+            this.EnterJTextBox.Location = new System.Drawing.Point(160, 61);
+            this.EnterJTextBox.Name = "EnterJTextBox";
+            this.EnterJTextBox.Size = new System.Drawing.Size(94, 21);
+            this.EnterJTextBox.TabIndex = 10;
+            // 
+            // EnterITextBox
+            // 
+            this.EnterITextBox.Enabled = false;
+            this.EnterITextBox.Location = new System.Drawing.Point(160, 31);
+            this.EnterITextBox.Name = "EnterITextBox";
+            this.EnterITextBox.Size = new System.Drawing.Size(94, 21);
+            this.EnterITextBox.TabIndex = 9;
+            // 
+            // EnterJLabel
+            // 
+            this.EnterJLabel.AutoSize = true;
+            this.EnterJLabel.Location = new System.Drawing.Point(9, 67);
+            this.EnterJLabel.Name = "EnterJLabel";
+            this.EnterJLabel.Size = new System.Drawing.Size(105, 15);
+            this.EnterJLabel.TabIndex = 1;
+            this.EnterJLabel.Text = "Enter j index:";
+            // 
+            // EnterILabel
+            // 
+            this.EnterILabel.AutoSize = true;
+            this.EnterILabel.Location = new System.Drawing.Point(9, 37);
+            this.EnterILabel.Name = "EnterILabel";
+            this.EnterILabel.Size = new System.Drawing.Size(105, 15);
+            this.EnterILabel.TabIndex = 0;
+            this.EnterILabel.Text = "Enter i index:";
             // 
             // IslandGameForm
             // 

@@ -25,11 +25,31 @@ namespace program4
             EnterJTextBox.Enabled = toggle;
         }
 
-        private void InfoButton_Click(object sender, EventArgs e)
+        private DialogResult ShowWinMessageBox()
         {
-            string caption = "How to Play Find the Tropical Island";
+            return MessageBox.Show("You won with only " +
+                navigationSystem!.GuessCount + " guesses!\n\n" +
+                "Would you like to play again?", "Victory!!!",
+                MessageBoxButtons.YesNo);
+        }
 
-            string text = "To start the game, enter the dimensions of the" +
+        private static void ShowInvalidSizeMessageBox()
+        {
+            MessageBox.Show("Please enter valid dimensions for the map."
+                ,"INVALID DIMENSIONS", MessageBoxButtons.OK, 
+                MessageBoxIcon.Error);
+        }
+
+        private static void ShowInvalidGuessMessageBox()
+        {
+            MessageBox.Show("Please enter a valid guess within the bounds " +
+                "of the map.", "INVALID GUESS", MessageBoxButtons.OK, 
+                MessageBoxIcon.Error);
+        }
+
+        private static void ShowHelpMessageBox()
+        {
+            MessageBox.Show("To start the game, enter the dimensions of the" +
                 " map.\nThe map cannot be 0 x 0 or smaller, nor" +
                 " greater than 10 x 10.\nOnce the size is entered and you" +
                 " click the \"START\" button, you can begin entering guesses" +
@@ -37,16 +57,18 @@ namespace program4
                 " The indices of the guess must be within the bounds of the" +
                 " size of the map. You may keep entering guesses until the" +
                 " the island has been found. Once it has been found, you" +
-                " will have the option of playing again.";
-            
-            MessageBox.Show(text, caption, MessageBoxButtons.OK, 
-                MessageBoxIcon.Information);
+                " will have the option of playing again.",
+                "How to Play Find the Tropical Island",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void InfoButton_Click(object sender, EventArgs e)
+        {
+            ShowHelpMessageBox();
         }
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            string text = "Please enter valid dimensions for the map.";
-            string caption = "INVALID MAP DIMENSIONS";
             string tempNumRows;
             string tempNumCols;
             int numRows;
@@ -56,16 +78,16 @@ namespace program4
             tempNumCols = EnterColumnsTextBox.Text;
 
             // Check if strings are valid integers
-            if (!(int.TryParse(tempNumRows, out numRows) && int.TryParse(tempNumCols, out numCols)))
+            if (!(int.TryParse(tempNumRows, out numRows) && 
+                int.TryParse(tempNumCols, out numCols)))
             {
-                MessageBox.Show(text, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                ShowInvalidSizeMessageBox();
             }
             // Check if size is valid
             else if ((numRows <= 0 || numRows > NavigationSystem.MAXROWS) || 
                 ((numCols <= 0) || (numCols > NavigationSystem.MAXCOLUMNS)))
             {
-                MessageBox.Show(text,caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowInvalidSizeMessageBox();
             }
             // Set up the game and disable map creation until game ends
             else
@@ -73,22 +95,19 @@ namespace program4
                 navigationSystem = new NavigationSystem(numRows, numCols);
                 MapSizeLabel.Text = "Size: " + navigationSystem.Size;
                 MapLabel.Text = navigationSystem.ToString();
-                GuessCountLabel.Text = "Guesses: " + navigationSystem.GuessCount;
+                GuessCountLabel.Text = "Guesses: " + 
+                    navigationSystem.GuessCount;
                 
-                // Disable START button and corresponding textboxes until
-                // the game ends
+                // Disable START button and corresponding textboxes
                 ToggleMapCreation(false);
 
-                // Enable GUESS button and corresponding textboxes until game ends
+                // Enable GUESS button and corresponding textboxes
                 ToggleGuessing(true);
             }
         }
 
         private void GuessButton_Click(object sender, EventArgs e)
         {
-            string text = "Please enter a valid guess within the bounds of " +
-                "the map.";
-            string caption = "INVALID GUESS";
             string tempI;
             string tempJ;
             int i;
@@ -100,14 +119,13 @@ namespace program4
             // Check if strings are valid integers
             if (!(int.TryParse(tempI, out i) && int.TryParse(tempJ, out j)))
             {
-                MessageBox.Show(text, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowInvalidGuessMessageBox();
             }
             // Check if size is valid
             else if ((i < 0 || i > navigationSystem!.MaxI) || ((j < 0) || 
                 (j > navigationSystem.MaxJ)))
             {
-                MessageBox.Show(text, caption, MessageBoxButtons.OK, 
-                    MessageBoxIcon.Error);
+                ShowInvalidGuessMessageBox();
             }
             else
             {
@@ -118,17 +136,29 @@ namespace program4
 
                 if(isWin)
                 {
-                    // Enable START button and corresponding textboxes
-                    ToggleMapCreation(true);
+                    DialogResult dialogResult = ShowWinMessageBox();
 
-                    // Disable GUESS button and corresponding textboxes
-                    ToggleGuessing(false);
+                    if(dialogResult == DialogResult.Yes)
+                    {
+                        // Enable START button and corresponding textboxes
+                        ToggleMapCreation(true);
 
-                    DialogResult dialogResult = MessageBox.Show("You Won!!!!", "You Won",MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (dialogResult == DialogResult.Yes)
-                        return;
+                        // Disable GUESS button and corresponding textboxes
+                        ToggleGuessing(false);
+
+                        // Clear all game data
+                        EnterColumnsTextBox.Text = "";
+                        EnterRowsTextBox.Text = "";
+                        EnterITextBox.Text = "";
+                        EnterJTextBox.Text = "";
+                        MapSizeLabel.Text = "Size:";
+                        GuessCountLabel.Text = "Guesses:";
+                        MapLabel.Text = "";
+                    }
                     else
+                    {
                         Close();
+                    }
                 }
             }
         }

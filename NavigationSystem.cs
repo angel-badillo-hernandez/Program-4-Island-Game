@@ -81,11 +81,10 @@ namespace program4
         /// <returns>true if correct guess, false otherwise. </returns>
         public bool EvaluateGuess(int i, int j)
         {
-            guessCount++;
-
             // If a guess was not made at (i,j), update symbol
             if (GameMap[i, j] == '~')
             {
+                guessCount++;
                 // Check if guess was correct, return true
                 if ((i == islandIndexI) && (j == islandIndexJ))
                 {
