@@ -3,9 +3,10 @@ namespace program4
 {
     public partial class IslandGameForm : Form
     {
-        NavigationSystem navigationSystem;
+        NavigationSystem? navigationSystem;
         public IslandGameForm()
         {
+            navigationSystem = null;
             InitializeComponent();
         }
 
@@ -13,7 +14,7 @@ namespace program4
         {
             string text = "To start the game, enter the dimensions of the " +
                 "map.\nThe map cannot be 0 x 0 or smaller, nor " +
-                "greater than 10 x 10.\n\nOnce the size is entered,";
+                "greater than 10 x 10.\n\nOnce the size is entered, you can begin entering guesses";
             string caption = "How to Play Find the Tropical Island";
             
             MessageBox.Show(text, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
