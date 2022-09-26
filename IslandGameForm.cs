@@ -28,7 +28,8 @@ namespace program4
         private DialogResult ShowWinMessageBox()
         {
             return MessageBox.Show("You won with only " +
-                navigationSystem!.GuessCount + " guess(es)!\n\n" +
+                navigationSystem!.GuessCount + " guess(es)!" + 
+                Environment.NewLine + Environment.NewLine +
                 "Would you like to play again?", "Victory!!!",
                 MessageBoxButtons.YesNo);
         }
@@ -115,13 +116,13 @@ namespace program4
 
             tempI = EnterITextBox.Text;
             tempJ = EnterJTextBox.Text;
-
+            
             // Check if strings are valid integers
             if (!(int.TryParse(tempI, out i) && int.TryParse(tempJ, out j)))
             {
                 ShowInvalidGuessMessageBox();
             }
-            // Check if size is valid
+            // Check if guess is valid
             else if ((i < 0 || i > navigationSystem!.MaxI) || ((j < 0) || 
                 (j > navigationSystem.MaxJ)))
             {

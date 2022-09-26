@@ -1,4 +1,6 @@
 ﻿// Put comment here
+using System.ComponentModel.Design;
+
 namespace program4
 {
     internal class NavigationSystem
@@ -21,6 +23,7 @@ namespace program4
                 return Rows.ToString() + " x " + Columns.ToString();
             }
         }
+
 
         public NavigationSystem(int numRows, int numColumns)
         {
@@ -53,10 +56,11 @@ namespace program4
             string text = "  ";
 
             // Add column indices at the top
-            for (int j = 0; j < Columns; j++)
-                text += j + " ";
+            int c = 0;
+            while (c < Columns)
+                text += c++ + " ";
             text += Environment.NewLine;
-
+            
             // For every row, add row index and each entry in the row
             for (int i = 0; i < Rows; i++)
             {
