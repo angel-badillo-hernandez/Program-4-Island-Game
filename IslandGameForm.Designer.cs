@@ -47,9 +47,11 @@
             this.EnterITextBox = new System.Windows.Forms.TextBox();
             this.EnterJLabel = new System.Windows.Forms.Label();
             this.EnterILabel = new System.Windows.Forms.Label();
+            this.HelpGroupBox = new System.Windows.Forms.GroupBox();
             this.MapCreateGroupBox.SuspendLayout();
             this.MapGroupBox.SuspendLayout();
             this.GuessGroupBox.SuspendLayout();
+            this.HelpGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // TitleLabel
@@ -65,7 +67,7 @@
             // 
             // InfoButton
             // 
-            this.InfoButton.Location = new System.Drawing.Point(555, 9);
+            this.InfoButton.Location = new System.Drawing.Point(42, 15);
             this.InfoButton.Name = "InfoButton";
             this.InfoButton.Size = new System.Drawing.Size(52, 30);
             this.InfoButton.TabIndex = 1;
@@ -227,15 +229,25 @@
             this.EnterILabel.TabIndex = 0;
             this.EnterILabel.Text = "Enter i index:";
             // 
+            // HelpGroupBox
+            // 
+            this.HelpGroupBox.Controls.Add(this.InfoButton);
+            this.HelpGroupBox.Location = new System.Drawing.Point(12, 16);
+            this.HelpGroupBox.Name = "HelpGroupBox";
+            this.HelpGroupBox.Size = new System.Drawing.Size(142, 51);
+            this.HelpGroupBox.TabIndex = 12;
+            this.HelpGroupBox.TabStop = false;
+            this.HelpGroupBox.Text = "Need help?";
+            // 
             // IslandGameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.HelpGroupBox);
             this.Controls.Add(this.GuessGroupBox);
             this.Controls.Add(this.MapGroupBox);
             this.Controls.Add(this.MapCreateGroupBox);
-            this.Controls.Add(this.InfoButton);
             this.Controls.Add(this.TitleLabel);
             this.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Name = "IslandGameForm";
@@ -246,6 +258,7 @@
             this.MapGroupBox.PerformLayout();
             this.GuessGroupBox.ResumeLayout(false);
             this.GuessGroupBox.PerformLayout();
+            this.HelpGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -272,5 +285,6 @@
         private Button GuessButton;
         private TextBox EnterJTextBox;
         private TextBox EnterITextBox;
+        private GroupBox HelpGroupBox;
     }
 }

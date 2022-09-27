@@ -97,14 +97,23 @@ namespace program4
                 " map." + Environment.NewLine +
                 "The map cannot be 0 x 0 or smaller, nor" +
                 " greater than 10 x 10." +
-                Environment.NewLine +
+                Environment.NewLine + Environment.NewLine +
                 "Once the size is entered and you" +
                 " click the \"START\" button, you can begin entering guesses" +
                 " and submitting your guess with the \"GUESS\" button." +
                 " The indices of the guess must be within the bounds of the" +
                 " size of the map. You may keep entering guesses until the" +
                 " the island has been found. Once it has been found, you" +
-                " will have the option of playing again.",
+                " will have the option of playing again." +
+                Environment.NewLine + Environment.NewLine +
+                "Legend for map hints:" +
+                Environment.NewLine + "N - Island is North" +
+                Environment.NewLine + "S - Island is South" +
+                Environment.NewLine + "E - Island is East" +
+                Environment.NewLine + "W - Island is West" +
+                Environment.NewLine + "R - Island is in this row" +
+                Environment.NewLine + "C - Island is in this column" +
+                Environment.NewLine + "I - Island has been found",
                 "How to Play Find the Tropical Island",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
