@@ -57,10 +57,11 @@
             // TitleLabel
             // 
             this.TitleLabel.AutoSize = true;
+            this.TitleLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.TitleLabel.Font = new System.Drawing.Font("Courier New", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.TitleLabel.Location = new System.Drawing.Point(201, 9);
             this.TitleLabel.Name = "TitleLabel";
-            this.TitleLabel.Size = new System.Drawing.Size(348, 27);
+            this.TitleLabel.Size = new System.Drawing.Size(350, 29);
             this.TitleLabel.TabIndex = 0;
             this.TitleLabel.Text = "Find the Tropical Island";
             this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
