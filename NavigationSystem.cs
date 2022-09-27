@@ -114,7 +114,6 @@ namespace program4
             }
         }
 
-
         /// <summary>
         /// Creates a string representation of NavigationSystem class and
         /// returns it.

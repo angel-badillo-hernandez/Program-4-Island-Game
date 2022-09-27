@@ -119,7 +119,8 @@ namespace program4
         }
 
         /// <summary>
-        /// Handles the event for when "HELP" button is pressed. Displays he
+        /// Handles the event for when "HELP" button is pressed. Displays the
+        /// a message box with directions on how to play.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -128,6 +129,14 @@ namespace program4
             ShowHelpMessageBox();
         }
 
+        /// <summary>
+        /// Handles the event for when "START" button is pressed. Takes user
+        /// input and generates map (if input is valid, otherwise show error
+        /// message box). Toggle map creation group after map is created and
+        /// enable guess group.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StartButton_Click(object sender, EventArgs e)
         {
             string tempNumRows;
@@ -167,6 +176,14 @@ namespace program4
             }
         }
 
+        /// <summary>
+        /// Handles the event for when "GUESS" button is pressed. Takes user
+        /// input (if valid, otherwise show error message box), then
+        /// processes guess, update map, and if game is won, show win message
+        /// box and prompt user to play again or end game.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GuessButton_Click(object sender, EventArgs e)
         {
             string tempI;
