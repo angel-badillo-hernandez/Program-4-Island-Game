@@ -27,6 +27,9 @@ namespace program4
 
         public NavigationSystem(int numRows, int numColumns)
         {
+            numRows = (numRows < MAXROWS && numRows > 0) ? numRows : MAXROWS;
+            numColumns = (numColumns < MAXCOLUMNS && numColumns > 0) 
+                ? numColumns : MAXCOLUMNS;
             GameMap = new char[numRows, numColumns];
             guessCount = 0;
             // Generate Random Location
