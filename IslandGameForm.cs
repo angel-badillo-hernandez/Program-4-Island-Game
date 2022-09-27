@@ -1,16 +1,36 @@
-// Put comment here
-
+/// Angel Badillo, Blake Gauna
+/// 09/27/22
+/// Program 4
+/// This Windows Form App implements an interactive game that allows the user
+/// to create a map within the allowed dimensions of 1x1 up to 10x10. After
+/// the map is create, the user may begin entering guesses until they win the
+/// game. Once the user wins, the user a message box will appear asking the
+/// user to click "Yes" if they want to play again, or click "No" if they want
+/// to quit and close the program.
 namespace program4
 {
+    /// <summary>
+    /// Controls the overall flow of the game and GUI components that make
+    /// up the game.
+    /// </summary>
     public partial class IslandGameForm : Form
     {
         NavigationSystem? navigationSystem;
+        
+        /// <summary>
+        /// Construct the IslandGameForm object and initialize
+        /// navigationSystem reference to null. 
+        /// </summary>
         public IslandGameForm()
         {
             navigationSystem = null;
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Disables "START" button and textboxes in the map creation group.
+        /// </summary>
+        /// <param name="toggle">true enables, false disables.</param>
         private void ToggleMapCreation(bool toggle)
         {
             StartButton.Enabled = toggle;
@@ -18,6 +38,10 @@ namespace program4
             EnterColumnsTextBox.Enabled = toggle;
         }
 
+        /// <summary>
+        /// Disables the "GUESS" button and textboxes in the guess group.
+        /// </summary>
+        /// <param name="toggle">true enables, false disables.</param>
         private void ToggleGuessing(bool toggle)
         {
             GuessButton.Enabled = toggle;
@@ -25,6 +49,13 @@ namespace program4
             EnterJTextBox.Enabled = toggle;
         }
 
+        /// <summary>
+        /// Displays the Victory message box that appears upon winning the
+        /// game. Displays number of guesses user won with, and prompts user
+        /// to either restart or close the game.
+        /// </summary>
+        /// <returns> DialogResult.Yes or DialogResult.No depending 
+        /// on user selection.</returns>
         private DialogResult ShowWinMessageBox()
         {
             return MessageBox.Show("You won with only " +
@@ -34,6 +65,10 @@ namespace program4
                 MessageBoxButtons.YesNo);
         }
 
+        /// <summary>
+        /// Displays the message box that appears when the user enters an
+        /// invalid size during game map creation.
+        /// </summary>
         private static void ShowInvalidSizeMessageBox()
         {
             MessageBox.Show("Please enter valid dimensions for the map."
@@ -41,6 +76,10 @@ namespace program4
                 MessageBoxIcon.Error);
         }
 
+        /// <summary>
+        /// Displays the message box that appears when the user enters an
+        /// invalid guess (not in bounds of map).
+        /// </summary>
         private static void ShowInvalidGuessMessageBox()
         {
             MessageBox.Show("Please enter a valid guess within the bounds " +
@@ -48,11 +87,18 @@ namespace program4
                 MessageBoxIcon.Error);
         }
 
+        /// <summary>
+        /// Displays the Help message box that appears when the user clicks
+        /// the "HELP" button. Provides directions on how to play the game.
+        /// </summary>
         private static void ShowHelpMessageBox()
         {
             MessageBox.Show("To start the game, enter the dimensions of the" +
-                " map.\nThe map cannot be 0 x 0 or smaller, nor" +
-                " greater than 10 x 10.\nOnce the size is entered and you" +
+                " map." + Environment.NewLine +
+                "The map cannot be 0 x 0 or smaller, nor" +
+                " greater than 10 x 10." +
+                Environment.NewLine +
+                "Once the size is entered and you" +
                 " click the \"START\" button, you can begin entering guesses" +
                 " and submitting your guess with the \"GUESS\" button." +
                 " The indices of the guess must be within the bounds of the" +
@@ -63,6 +109,11 @@ namespace program4
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        /// <summary>
+        /// Handles the event for when "HELP" button is pressed. Displays he
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void InfoButton_Click(object sender, EventArgs e)
         {
             ShowHelpMessageBox();
@@ -84,7 +135,7 @@ namespace program4
             {
                 ShowInvalidSizeMessageBox();
             }
-            // Check if size is valid
+            // Check if size is invalid
             else if ((numRows <= 0 || numRows > NavigationSystem.MAXROWS) || 
                 ((numCols <= 0) || (numCols > NavigationSystem.MAXCOLUMNS)))
             {
@@ -122,7 +173,7 @@ namespace program4
             {
                 ShowInvalidGuessMessageBox();
             }
-            // Check if guess is valid
+            // Check if guess is invalid
             else if ((i < 0 || i > navigationSystem!.MaxI) || ((j < 0) || 
                 (j > navigationSystem.MaxJ)))
             {

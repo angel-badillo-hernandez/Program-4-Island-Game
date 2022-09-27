@@ -1,8 +1,19 @@
-﻿// Put comment here
-using System.ComponentModel.Design;
-
+﻿/// Angel Badillo, Blake Gauna
+/// 09/27/22
+/// Program 4
+/// This Windows Form App implements an interactive game that allows the user
+/// to create a map within the allowed dimensions of 1x1 up to 10x10. After
+/// the map is create, the user may begin entering guesses until they win the
+/// game. Once the user wins, the user a message box will appear asking the
+/// user to click "Yes" if they want to play again, or click "No" if they want
+/// to quit and close the program.
 namespace program4
 {
+    /// <summary>
+    /// A simple class that contains the game map, properties to assist with
+    /// bound checking and tracking of guesses, as well as a method for
+    /// evaluating guesses and converting the map to a string representation.
+    /// </summary>
     internal class NavigationSystem
     {
         public const int MAXROWS = 10;
@@ -11,11 +22,35 @@ namespace program4
         private readonly int islandIndexJ;
         private char[,] GameMap;
         private int guessCount;
+        
+        /// <summary>
+        /// Returns the total number of rows in the map.
+        /// </summary>
         public int Rows { get { return GameMap.GetLength(0); } }
+        
+        /// <summary>
+        /// Returns the total number of columns in the map.
+        /// </summary>
         public int Columns { get { return GameMap.GetLength(1); } }
+        
+        /// <summary>
+        /// Returns the maximum i index in the map.
+        /// </summary>
         public int MaxI { get { return GameMap.GetUpperBound(0); } }
+        
+        /// <summary>
+        /// Returns the maximum j index in the map.
+        /// </summary>
         public int MaxJ { get { return GameMap.GetUpperBound(1); } }
+        
+        /// <summary>
+        /// Returns the guess count property that gets incremented every guess
+        /// </summary>
         public int GuessCount { get { return guessCount; } }
+        
+        /// <summary>
+        /// Returns a string representation of the size of the game map.
+        /// </summary>
         public string Size
         {
             get
@@ -24,14 +59,46 @@ namespace program4
             }
         }
 
+        /// <summary>
+        /// Constructs a default NavigationSystem object. The map will be
+        /// the maximum possible size by default, which is 10x10.
+        /// </summary>
+        public NavigationSystem()
+        {
+            GameMap = new char[MAXROWS, MAXCOLUMNS];
+            guessCount = 0;
 
+            // Generate Random Location
+            Random rand = new Random();
+            islandIndexI = rand.Next(0, Rows);
+            islandIndexJ = rand.Next(0, Columns);
+
+            // Generate initial Map
+            for (int i = 0; i < Rows; i++)
+            {
+                for (int j = 0; j < Columns; j++)
+                {
+                    GameMap[i, j] = '~';
+                }
+            }
+        }
+
+        /// <summary>
+        /// Constructs a NavigationSystem object. The size must be greater
+        /// than 0x0 and can go up to at most 10x10.
+        /// </summary>
+        /// <param name="numRows">Number of rows in the map.</param>
+        /// <param name="numColumns">Number of columns in the map.</param>
         public NavigationSystem(int numRows, int numColumns)
         {
-            numRows = (numRows < MAXROWS && numRows > 0) ? numRows : MAXROWS;
-            numColumns = (numColumns < MAXCOLUMNS && numColumns > 0) 
-                ? numColumns : MAXCOLUMNS;
+            // If invalid size, default to max size. Else, use size passed in.
+            numRows = (numRows > MAXROWS || numRows <= 0) ? MAXROWS : numRows;
+            numColumns = (numColumns > MAXCOLUMNS || numColumns <= 0) 
+                ? MAXCOLUMNS : numColumns;
+
             GameMap = new char[numRows, numColumns];
             guessCount = 0;
+
             // Generate Random Location
             Random rand = new Random();
             islandIndexI = rand.Next(0, Rows);
